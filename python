@@ -1,0 +1,63 @@
+
+
+import random
+
+def get_user_choice():
+    while True:
+        choice = input("Choose 'odd' or 'even': ").lower()
+        if choice in ['odd', 'even']:
+            return choice
+        else:
+            print("Invalid choice, please choose again.")
+
+def get_user_number():
+    while True:
+        try:
+            num = int(input("Enter a number between 1 and 6: "))
+            if 1 <= num <= 6:
+                return num
+            else:
+                print("Please enter a valid number between 1 and 6.")
+        except ValueError:
+            print("Please enter a valid number.")
+
+def play_game():
+    user_choice = get_user_choice()
+    print(f"You chose {user_choice}")
+
+    while True:
+        # User's turn
+        user_num = get_user_number()
+
+        comp_num = random.randint(1, 6)
+        print(f"Computer chose: {comp_num}")
+
+        total = user_num + comp_num
+
+        if total % 2 == 0:
+            result = 'even'
+        else:
+            result = 'odd'
+
+        if result == user_choice:
+            print(f"The sum is {result}, so you bat!")
+
+            if user_num == comp_num:
+                print("You're OUT!")
+                print("Computer Wins!")
+                break
+            else:
+                print(f"Your score: {user_num}")
+        else:
+            print(f"The sum is {result}, so computer bats!")
+
+            if user_num == comp_num:
+                print("Computer is OUT!")
+                print("You Win!")
+                break
+            else:
+                print(f"Computer's score: {comp_num}")
+
+
+if __name__ == "__main__":
+    play_game()
